@@ -1,0 +1,160 @@
+/* ==========================================================================
+   ROMANTIC CHRISTMAS SURPRISE WEBSITE FOR "BABE" - ULTRA FAST & LAG-FREE
+   ========================================================================== */
+
+/* Root Variables */
+:root {
+  --color-midnight: #07152e;
+  --color-deep-blue: #102a43;
+  --color-xmas-red: #d62828;
+  --color-xmas-green: #2a9d4b;
+  --color-warm-gold: #ffd166;
+  --color-warm-white: #fff4d6;
+  --color-romantic-pink: #ff6b81;
+}
+
+/* Base Optimization - Avoid heavy repaints & reflows */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--color-midnight);
+  color: var(--color-warm-white);
+  overflow-x: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Glassmorphism Styles */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.romantic-glass-card {
+  background: rgba(16, 42, 67, 0.95);
+  border: 1px solid rgba(255, 209, 102, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Polaroid Card Styling with Golden/Snow Accents */
+.polaroid-card {
+  background: #ffffff;
+  border: 1px solid rgba(255, 209, 102, 0.5);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(255, 209, 102, 0.3);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Star background */
+.intro-stars {
+  background-image: 
+    radial-gradient(2px 2px at 30px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 80px 120px, #ffd166, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 180px 70px, #ff6b81, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 280px 160px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 380px 90px, #ffd166, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 400px 400px;
+}
+
+/* Gift Box Smooth Float */
+.gift-box {
+  animation: giftFloating 2.8s ease-in-out infinite;
+  transform: translateZ(0);
+}
+
+@keyframes giftFloating {
+  0%, 100% {
+    transform: translateY(0px) translateZ(0);
+  }
+  50% {
+    transform: translateY(-6px) translateZ(0);
+  }
+}
+
+/* Gift Shake on Opening Start */
+.gift-shaking {
+  animation: giftWobble 0.3s ease-in-out infinite !important;
+}
+
+@keyframes giftWobble {
+  0%, 100% { transform: translateY(-2px) rotate(0deg) translateZ(0); }
+  25% { transform: translateY(-2px) rotate(-2.5deg) translateZ(0); }
+  75% { transform: translateY(-2px) rotate(2.5deg) translateZ(0); }
+}
+
+/* Gift Lid Flying Off */
+.gift-lid-opening {
+  transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+  transform: translate(-50%, -70px) rotate(-20deg) translateZ(0) !important;
+  opacity: 0;
+}
+
+/* Top Garland Bulbs */
+.bulb {
+  width: 12px;
+  height: 20px;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+}
+.bulb::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 2px;
+  width: 8px;
+  height: 4px;
+  background: #334155;
+  border-radius: 2px;
+}
+.bulb-red { background: #dc2626; }
+.bulb-gold { background: #eab308; }
+.bulb-green { background: #16a34a; }
+.bulb-blue { background: #0284c7; }
+.bulb-pink { background: #db2777; }
+
+/* Character Idle Breathing */
+.character-man {
+  animation: characterIdle 3.5s ease-in-out infinite;
+  transform-origin: bottom center;
+  transform: translateZ(0);
+}
+
+@keyframes characterIdle {
+  0%, 100% {
+    transform: translateY(0px) scaleY(1) translateZ(0);
+  }
+  50% {
+    transform: translateY(-3px) scaleY(1.01) translateZ(0);
+  }
+}
+
+/* Santa Waving */
+@keyframes santaWaving {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-20deg); }
+}
+.animate-wave {
+  animation: santaWaving 1.4s ease-in-out infinite;
+}
+
+/* Tree Ornaments Glow */
+.glow-red { filter: drop-shadow(0 0 4px #ef4444); }
+.glow-gold { filter: drop-shadow(0 0 4px #f59e0b); }
+.glow-pink { filter: drop-shadow(0 0 4px #ec4899); }
+.glow-blue { filter: drop-shadow(0 0 4px #3b82f6); }
+
+.tree-star {
+  filter: drop-shadow(0 0 10px #ffd166);
+}
+
+/* Reduced Motion Mode Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
