@@ -1,6 +1,6 @@
 /**
  * Romantic Christmas "Ber Months" Surprise Website Logic
- * Instant, smooth, lag-free performance with zero frame drops.
+ * Handles animations, audio synthesis, memory gallery, and responsive letter revealing.
  */
 
 (() => {
@@ -189,12 +189,12 @@
     fxCtx = fxCanvas.getContext('2d', { alpha: true });
 
     AppState.snowflakes = [];
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 30; i++) {
       AppState.snowflakes.push({
         x: Math.random() * fxCanvas.width,
         y: Math.random() * fxCanvas.height,
-        radius: Math.random() * 2 + 1,
-        speedY: Math.random() * 0.9 + 0.5,
+        radius: Math.random() * 1.8 + 0.8,
+        speedY: Math.random() * 0.8 + 0.5,
         swing: Math.random() * Math.PI * 2,
         swingSpeed: 0.02,
         opacity: Math.random() * 0.5 + 0.3
@@ -267,7 +267,7 @@
     fxCtx.globalAlpha = 1.0;
   };
 
-  const spawnBurst = (x, y, count = 25, spread = 5, types = ['circle', 'star', 'heart']) => {
+  const spawnBurst = (x, y, count = 20, spread = 4, types = ['circle', 'star', 'heart']) => {
     const colors = ['#FFD166', '#FF6B81', '#FFF4D6', '#D62828', '#FFFFFF'];
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
@@ -279,7 +279,7 @@
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 1,
         gravity: 0.04,
-        size: Math.random() * 6 + 5,
+        size: Math.random() * 5 + 4,
         color: colors[Math.floor(Math.random() * colors.length)],
         life: 1.0,
         decay: 0.025,
@@ -314,7 +314,7 @@
     setTimeout(() => {
       AppState.currentScene = 'transitioning';
       const rect = giftContainer.getBoundingClientRect();
-      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 35, 8, ['star', 'heart']);
+      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 30, 7, ['star', 'heart']);
 
       flashOverlay.classList.remove('opacity-0');
       flashOverlay.classList.add('opacity-100');
@@ -336,7 +336,7 @@
             memoryGallery.classList.add('opacity-100', 'translate-y-0');
             const rect = memoryGallery.getBoundingClientRect();
             spawnBurst(rect.left + rect.width / 2, rect.top + 30, 20, 4, ['star', 'heart']);
-          }, 300);
+          }, 250);
         }
 
         // Smoothly display Man
@@ -345,7 +345,7 @@
 
         setTimeout(() => {
           showBubble(manBubble, 3500);
-        }, 500);
+        }, 400);
 
         AppState.currentScene = 'main';
       }, 250);
@@ -353,26 +353,34 @@
     }, 450);
   };
 
+  // Reveal Glassmorphic Love Letter ONLY When the Man is Tapped
   const triggerLoveLetterReveal = () => {
+    // Unhide the section container if not yet displayed
+    if (messageCardSection.classList.contains('hidden')) {
+      messageCardSection.classList.remove('hidden');
+    }
+
     if (hasLetterBeenRevealed) {
       messageCardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
     hasLetterBeenRevealed = true;
 
-    messageCardSection.classList.remove('opacity-0', 'translate-y-6');
-    messageCardSection.classList.add('opacity-100', 'translate-y-0');
+    requestAnimationFrame(() => {
+      messageCardSection.classList.remove('opacity-0', 'translate-y-6');
+      messageCardSection.classList.add('opacity-100', 'translate-y-0');
 
-    setTimeout(() => {
-      messageCardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 150);
-
-    const lines = document.querySelectorAll('.letter-line');
-    lines.forEach((line, index) => {
       setTimeout(() => {
-        line.classList.remove('opacity-0');
-        line.classList.add('opacity-100');
-      }, index * 80 + 100);
+        messageCardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+
+      const lines = document.querySelectorAll('.letter-line');
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.classList.remove('opacity-0');
+          line.classList.add('opacity-100');
+        }, index * 60 + 80);
+      });
     });
   };
 
@@ -398,13 +406,14 @@
       }
     });
 
+    // MAN CLICK TRIGGER -> REVEALS AND SCROLLS TO LOVE LETTER
     charMan.addEventListener('click', () => {
       showBubble(manBubble, 3000);
       manHeartFloat.classList.remove('opacity-0');
       setTimeout(() => manHeartFloat.classList.add('opacity-0'), 1500);
 
       const rect = charMan.getBoundingClientRect();
-      spawnBurst(rect.left + rect.width / 2, rect.top + 30, 15, 4, ['heart', 'star']);
+      spawnBurst(rect.left + rect.width / 2, rect.top + 20, 15, 4, ['heart', 'star']);
       playMagicalChime();
 
       triggerLoveLetterReveal();
@@ -420,22 +429,21 @@
     santaCharacter.addEventListener('click', () => {
       showBubble(santaBubble, 3000);
       const rect = santaCharacter.getBoundingClientRect();
-      spawnBurst(rect.left + rect.width / 2, rect.top + 30, 15, 4, ['star', 'heart']);
+      spawnBurst(rect.left + rect.width / 2, rect.top + 20, 15, 4, ['star', 'heart']);
       playMagicalChime();
     });
 
-    // Add particle burst when clicking photos in gallery
     document.querySelectorAll('.polaroid-card').forEach((card) => {
       card.addEventListener('click', () => {
         const rect = card.getBoundingClientRect();
-        spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20, 5, ['heart', 'star']);
+        spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 15, 4, ['heart', 'star']);
         playMagicalChime();
       });
     });
 
     finalSurpriseBtn.addEventListener('click', () => {
       AppState.currentScene = 'final';
-      spawnBurst(window.innerWidth / 2, window.innerHeight / 2, 40, 8, ['heart', 'star']);
+      spawnBurst(window.innerWidth / 2, window.innerHeight / 2, 35, 7, ['heart', 'star']);
       playMagicalChime();
 
       finalSurpriseModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -463,7 +471,7 @@
   const init = () => {
     initCanvas();
     initInteractions();
-    console.log('✨ Ultra-Fast Christmas Surprise with Memory Gallery for BABE Ready! ❤️🎄');
+    console.log('✨ Responsive Christmas Surprise with Protected Scroll Ready! ❤️🎄');
   };
 
   if (document.readyState === 'loading') {
