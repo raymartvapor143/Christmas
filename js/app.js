@@ -1041,43 +1041,45 @@
     AppState.currentScene = 'galaxy';
 
     const modal = document.getElementById('finalSurpriseModal');
+    const intro = document.getElementById('sceneIntro');
     const main = document.getElementById('sceneMain');
     const galaxy = document.getElementById('sceneGalaxy');
     const flash = document.getElementById('flashOverlay');
 
-    if (main) main.classList.add('opacity-0');
     if (modal) {
-      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.add('hidden', 'opacity-0', 'pointer-events-none');
       modal.classList.remove('opacity-100');
+    }
+    if (intro) intro.classList.add('hidden');
+    if (main) {
+      main.classList.add('hidden', 'opacity-0');
+      main.classList.remove('opacity-100');
+    }
+
+    if (galaxy) {
+      galaxy.classList.remove('hidden', 'opacity-0');
+      galaxy.classList.add('opacity-100');
+      galaxy.style.display = 'block';
+      galaxy.style.opacity = '1';
     }
 
     if (flash) {
       flash.classList.remove('opacity-0');
       flash.classList.add('opacity-100');
+      setTimeout(() => {
+        flash.classList.remove('opacity-100');
+        flash.classList.add('opacity-0');
+      }, 300);
     }
 
     CosmicSynth.playChord();
+    GalaxyEngine.init();
+    GalaxyEngine.start();
 
     setTimeout(() => {
-      if (main) main.classList.add('hidden');
-      if (galaxy) {
-        galaxy.classList.remove('hidden');
-        galaxy.classList.remove('opacity-0');
-        galaxy.classList.add('opacity-100');
-      }
-
-      GalaxyEngine.init();
-      GalaxyEngine.start();
-
-      if (flash) {
-        flash.classList.remove('opacity-100');
-        flash.classList.add('opacity-0');
-      }
-
-      setTimeout(() => {
-        GalaxyEngine.spawnSupernova(window.innerWidth / 2, window.innerHeight * 0.45);
-      }, 400);
-    }, 400);
+      GalaxyEngine.resize();
+      GalaxyEngine.spawnSupernova(window.innerWidth / 2, window.innerHeight * 0.45);
+    }, 100);
   };
 
   window.enterGalaxyScene = enterGalaxyScene;
@@ -1088,25 +1090,31 @@
     AppState.currentScene = 'main';
     GalaxyEngine.stop();
 
-    if (sceneGalaxy) sceneGalaxy.classList.add('opacity-0');
-    if (flashOverlay) {
-      flashOverlay.classList.remove('opacity-0');
-      flashOverlay.classList.add('opacity-100');
+    const main = document.getElementById('sceneMain');
+    const galaxy = document.getElementById('sceneGalaxy');
+    const flash = document.getElementById('flashOverlay');
+
+    if (galaxy) {
+      galaxy.classList.add('hidden', 'opacity-0');
+      galaxy.classList.remove('opacity-100');
+      galaxy.style.display = 'none';
     }
 
-    setTimeout(() => {
-      if (sceneGalaxy) sceneGalaxy.classList.add('hidden');
-      if (sceneMain) {
-        sceneMain.classList.remove('hidden');
-        sceneMain.classList.remove('opacity-0');
-        sceneMain.classList.add('opacity-100');
-      }
+    if (main) {
+      main.classList.remove('hidden', 'opacity-0');
+      main.classList.add('opacity-100');
+      main.style.display = 'block';
+      main.style.opacity = '1';
+    }
 
-      if (flashOverlay) {
-        flashOverlay.classList.remove('opacity-100');
-        flashOverlay.classList.add('opacity-0');
-      }
-    }, 350);
+    if (flash) {
+      flash.classList.remove('opacity-0');
+      flash.classList.add('opacity-100');
+      setTimeout(() => {
+        flash.classList.remove('opacity-100');
+        flash.classList.add('opacity-0');
+      }, 300);
+    }
   };
 
   // --- INTERACTION HANDLERS ---
