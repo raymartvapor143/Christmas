@@ -45,8 +45,12 @@
   <!-- Performance-Optimized Combined Canvas Layer for Snow & Particle FX -->
   <canvas id="fxCanvas" class="fixed inset-0 pointer-events-none z-30"></canvas>
 
-  <!-- Sound Toggle Control -->
+  <!-- Sound Toggle Control & Galaxy Shortcut -->
   <div class="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center gap-2">
+    <button id="goToGalaxyNavBtn" class="hidden glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-pink-200 border border-pink-400/40 bg-pink-950/40 hover:bg-pink-900/60 hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none cursor-pointer shadow-lg" aria-label="Go to Galaxy Universe">
+      <span>🌌</span>
+      <span class="hidden xs:inline">Our Galaxy</span>
+    </button>
     <button id="musicToggle" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-warmGold/60 cursor-pointer shadow-lg" aria-label="Toggle festive music">
       <span id="musicIcon" class="text-sm sm:text-base">🎵</span>
       <span id="musicLabel" class="text-warmGold">Play Holiday Music</span>
@@ -585,12 +589,74 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button id="enterGalaxyBtn" class="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_25px_rgba(255,107,180,0.8)] hover:shadow-[0_0_35px_rgba(255,107,180,1)] transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 border border-pink-300/40">
+          <span>🌌</span>
+          <span>Travel to Our Galaxy Universe</span>
+          <span class="animate-pulse">✨</span>
+        </button>
         <button id="closeFinalBtn" class="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-warmWhite text-xs sm:text-sm font-medium transition-all hover:scale-105 cursor-pointer">
-          Back to Our Christmas World 🎄
+          Stay in Christmas World 🎄
         </button>
       </div>
     </div>
   </div>
+
+  <!-- ========================================================================= -->
+  <!-- SCENE 3: GALAXY LOVE LINE - 3D PARTICLE UNIVERSE 🌌💖                      -->
+  <!-- ========================================================================= -->
+  <section id="sceneGalaxy" class="fixed inset-0 w-full h-full bg-[#030008] hidden opacity-0 transition-opacity duration-1000 z-40 overflow-hidden select-none">
+    <!-- Galaxy 3D Interactive Canvas -->
+    <canvas id="galaxyCanvas" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+
+    <!-- Celestial Stardust Background Overlay -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,107,180,0.08)_0%,rgba(5,0,15,0.7)_70%,#030008_100%)] pointer-events-none"></div>
+
+    <!-- Galaxy Top HUD Controls -->
+    <div class="absolute top-3 left-3 sm:top-5 sm:left-5 z-50 flex items-center gap-2 sm:gap-3">
+      <button id="galaxyBackBtn" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-white hover:bg-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg border border-pink-400/40">
+        <span>🎄</span>
+        <span class="hidden xs:inline">Back to Christmas</span>
+        <span class="xs:hidden">Back</span>
+      </button>
+      <button id="galaxySpeedBtn" class="glass-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full flex items-center gap-1 text-[11px] sm:text-xs text-pink-200 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md border border-pink-500/30" title="Toggle Orbit Speed">
+        <span>⚡</span>
+        <span id="galaxySpeedLabel">Normal Speed</span>
+      </button>
+    </div>
+
+    <!-- Galaxy Title Header Overlay -->
+    <div class="absolute top-3 sm:top-5 inset-x-0 mx-auto max-w-lg text-center pointer-events-none z-40 px-3">
+      <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-pink-950/60 backdrop-blur-md border border-pink-500/40 text-pink-300 text-[10px] sm:text-xs font-semibold tracking-widest uppercase shadow-[0_0_15px_rgba(255,107,180,0.4)]">
+        <span>✨</span> OUR UNIVERSE • GALAXY LOVE LINE <span>✨</span>
+      </div>
+      <h2 class="font-cinzel text-xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-100 to-pink-400 font-bold drop-shadow-[0_0_20px_rgba(255,105,180,0.8)] mt-1">
+        To Infinity & Beyond With BABE
+      </h2>
+      <p class="text-pink-200/70 text-[10px] sm:text-xs font-light mt-0.5 max-w-xs sm:max-w-md mx-auto">
+        👆 Drag to rotate universe • Scroll/pinch to zoom • Tap anywhere to create supernovas 💫
+      </p>
+    </div>
+
+    <!-- Floating Memory Hologram Preview in Galaxy Orbit -->
+    <div id="galaxyPhotoOverlay" class="absolute bottom-16 sm:bottom-20 inset-x-0 mx-auto max-w-sm px-4 pointer-events-none z-40 flex justify-center items-center">
+      <div class="glass-pill px-4 py-2 rounded-2xl bg-black/50 backdrop-blur-md border border-pink-400/30 text-center shadow-[0_0_25px_rgba(255,107,180,0.3)]">
+        <p class="font-dancing text-sm sm:text-base text-pink-300">“You are my whole universe, today and for all eternity ❤️”</p>
+      </div>
+    </div>
+
+    <!-- Galaxy Floating Action Bottom HUD -->
+    <div class="absolute bottom-3 sm:bottom-5 inset-x-0 z-50 flex justify-center items-center gap-2 sm:gap-3 px-3">
+      <button id="addLoveMessageBtn" class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 text-white font-medium text-xs sm:text-sm shadow-[0_0_20px_rgba(255,105,180,0.6)] hover:shadow-[0_0_30px_rgba(255,105,180,0.9)] hover:scale-105 active:scale-95 transition-all cursor-pointer border border-pink-300/40 flex items-center gap-1.5">
+        <span>💌</span>
+        <span>Send Cosmic Wish</span>
+      </button>
+
+      <button id="galaxyBurstBtn" class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-pink-100 font-medium text-xs sm:text-sm backdrop-blur-md border border-pink-300/30 shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5">
+        <span>💖</span>
+        <span>Supernova Heart</span>
+      </button>
+    </div>
+  </section>
 
   <!-- Audio Element Placeholder -->
   <audio id="holidayAudio" loop preload="auto"></audio>
