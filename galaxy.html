@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#030008] text-warmWhite antialiased selection:bg-romanticPink selection:text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🌌 Our Galaxy Universe • To Infinity & Beyond With BABE 💖</title>
+  
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#030008',
+            romanticPink: '#FF6B81',
+            warmGold: '#FFD166',
+            warmWhite: '#FFFBF5',
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            dancing: ['Dancing Script', 'cursive'],
+            outfit: ['Outfit', 'sans-serif'],
+            playfair: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #030008;
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 107, 180, 0.3);
+    }
+    .glass-pill:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 107, 180, 0.6);
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      touch-action: none;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.08); }
+    }
+    .cosmic-heart-glow {
+      animation: pulseGlow 3.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="w-full h-full bg-[#030008] relative font-outfit overflow-hidden">
+
+  <!-- 3D Interactive Galaxy Canvas -->
+  <canvas id="galaxyCanvas" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"></canvas>
+
+  <!-- Ambient Glow Background Radial -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,107,180,0.12)_0%,rgba(15,3,25,0.7)_60%,#030008_100%)] pointer-events-none z-20"></div>
+
+  <!-- Top Navigation HUD -->
+  <div class="absolute top-3 left-3 sm:top-5 sm:left-5 z-40 flex items-center gap-2 sm:gap-3">
+    <!-- Back to Christmas Page Button -->
+    <a href="index.html" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-white hover:text-pink-200 transition-all hover:scale-105 active:scale-95 shadow-lg border border-pink-400/40">
+      <span>🎄</span>
+      <span>Back to Christmas</span>
+    </a>
+
+    <!-- Speed Toggle -->
+    <button id="speedToggleBtn" class="glass-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full flex items-center gap-1 text-[11px] sm:text-xs text-pink-200 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md border border-pink-500/30">
+      <span>⚡</span>
+      <span id="speedLabel">Normal Speed</span>
+    </button>
+  </div>
+
+  <!-- Top Audio Controller -->
+  <div class="absolute top-3 right-3 sm:top-5 sm:right-5 z-40 flex items-center gap-2">
+    <button id="cosmicAudioBtn" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium text-pink-200 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg border border-pink-400/40">
+      <span id="audioIcon">🎵</span>
+      <span id="audioLabel">Cosmic Music</span>
+    </button>
+  </div>
+
+  <!-- Central Title Header Overlay -->
+  <div class="absolute top-3 sm:top-6 inset-x-0 mx-auto max-w-lg text-center pointer-events-none z-30 px-3">
+    <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-pink-950/70 backdrop-blur-md border border-pink-500/40 text-pink-300 text-[10px] sm:text-xs font-semibold tracking-widest uppercase shadow-[0_0_20px_rgba(255,107,180,0.4)]">
+      <span>✨</span> OUR UNIVERSE • GALAXY LOVE LINE <span>✨</span>
+    </div>
+    <h1 class="font-cinzel text-xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-100 to-pink-400 font-bold drop-shadow-[0_0_25px_rgba(255,105,180,0.8)] mt-1">
+      To Infinity & Beyond With BABE
+    </h1>
+    <p class="text-pink-200/75 text-[10px] sm:text-xs font-light mt-0.5 max-w-xs sm:max-w-md mx-auto">
+      👆 Drag to rotate 3D universe • Scroll to zoom • Click/tap for supernovas 💫
+    </p>
+  </div>
+
+  <!-- Holographic Love Quote Overlay -->
+  <div class="absolute bottom-16 sm:bottom-20 inset-x-0 mx-auto max-w-sm px-4 pointer-events-none z-30 flex justify-center items-center">
+    <div class="glass-pill px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl bg-black/60 backdrop-blur-md border border-pink-400/30 text-center shadow-[0_0_25px_rgba(255,107,180,0.35)]">
+      <p id="romanticQuoteDisplay" class="font-dancing text-sm sm:text-base text-pink-200">
+        “You are my whole universe, today and for all eternity ❤️”
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Interactive Action HUD -->
+  <div class="absolute bottom-3 sm:bottom-5 inset-x-0 z-40 flex justify-center items-center gap-2 sm:gap-3 px-3">
+    <button id="sendWishBtn" class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 text-white font-medium text-xs sm:text-sm shadow-[0_0_20px_rgba(255,105,180,0.6)] hover:shadow-[0_0_30px_rgba(255,105,180,0.9)] hover:scale-105 active:scale-95 transition-all cursor-pointer border border-pink-300/40 flex items-center gap-1.5">
+      <span>💌</span>
+      <span>Add Love Message</span>
+    </button>
+
+    <button id="supernovaBtn" class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-pink-100 font-medium text-xs sm:text-sm backdrop-blur-md border border-pink-300/30 shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5">
+      <span>💖</span>
+      <span>Supernova Burst</span>
+    </button>
+  </div>
+
+  <!-- 3D Galaxy Engine Script -->
+  <script>
+    (() => {
+      'use strict';
+
+      // --- WEB AUDIO CELESTIAL SYNTHESIZER ---
+      let audioCtx = null;
+      let isMusicPlaying = false;
+      let musicInterval = null;
+
+      const initAudio = () => {
+        if (!audioCtx) {
+          const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtxClass) audioCtx = new AudioCtxClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      };
+
+      const CosmicSound = {
+        playChord() {
+          initAudio();
+          if (!audioCtx) return;
+          const freqs = [329.63, 493.88, 659.25, 987.77, 1318.51];
+          freqs.forEach((f, i) => {
+            setTimeout(() => {
+              try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const now = audioCtx.currentTime;
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(f, now);
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.exponentialRampToValueAtTime(0.05, now + 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 1.8);
+              } catch (e) {}
+            }, i * 60);
+          });
+        },
+
+        playTwinkle() {
+          initAudio();
+          if (!audioCtx) return;
+          const freqs = [880, 1174.66, 1396.91, 1760];
+          const f = freqs[Math.floor(Math.random() * freqs.length)];
+          try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            const now = audioCtx.currentTime;
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, now);
+            gain.gain.setValueAtTime(0.04, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.7);
+          } catch (e) {}
+        },
+
+        startAmbientMusic() {
+          initAudio();
+          if (isMusicPlaying) return;
+          isMusicPlaying = true;
+          document.getElementById('audioIcon').textContent = '🔊';
+          document.getElementById('audioLabel').textContent = 'Music On 🎶';
+
+          const chords = [
+            [261.63, 329.63, 392.00, 523.25], // C
+            [220.00, 261.63, 329.63, 440.00], // Am
+            [174.61, 220.00, 261.63, 349.23], // F
+            [196.00, 246.94, 293.66, 392.00]  // G
+          ];
+          let chordIndex = 0;
+
+          const playNextChord = () => {
+            if (!isMusicPlaying) return;
+            const currentChord = chords[chordIndex];
+            currentChord.forEach((f, idx) => {
+              setTimeout(() => {
+                if (!isMusicPlaying || !audioCtx) return;
+                try {
+                  const osc = audioCtx.createOscillator();
+                  const gain = audioCtx.createGain();
+                  const now = audioCtx.currentTime;
+                  osc.type = 'sine';
+                  osc.frequency.setValueAtTime(f, now);
+                  gain.gain.setValueAtTime(0.0001, now);
+                  gain.gain.linearRampToValueAtTime(0.03, now + 0.4);
+                  gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+                  osc.connect(gain);
+                  gain.connect(audioCtx.destination);
+                  osc.start(now);
+                  osc.stop(now + 3.0);
+                } catch (e) {}
+              }, idx * 120);
+            });
+
+            chordIndex = (chordIndex + 1) % chords.length;
+            musicInterval = setTimeout(playNextChord, 3200);
+          };
+
+          playNextChord();
+        },
+
+        stopAmbientMusic() {
+          isMusicPlaying = false;
+          if (musicInterval) clearTimeout(musicInterval);
+          document.getElementById('audioIcon').textContent = '🎵';
+          document.getElementById('audioLabel').textContent = 'Cosmic Music';
+        },
+
+        toggle() {
+          if (isMusicPlaying) this.stopAmbientMusic();
+          else this.startAmbientMusic();
+        }
+      };
+
+      // --- 3D GALAXY ENGINE ---
+      const canvas = document.getElementById('galaxyCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      let pitch = 0.48;
+      let yaw = 0;
+      let zoom = 1.0;
+      let speedMultiplier = 1.0;
+      let isDragging = false;
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+      const autoRotateSpeed = 0.0035;
+
+      let galaxyParticles = [];
+      let heartBeamParticles = [];
+      let orbitingTexts = [];
+      let shootingStars = [];
+      let supernovas = [];
+      let loadedImages = [];
+
+      const resize = () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      };
+      window.addEventListener('resize', resize);
+
+      // Load Memory Photos
+      const loadMemoryImages = () => {
+        const srcList = ['image/1.jpg', 'image/2.jpg', 'image/3.jpg'];
+        loadedImages = [];
+        srcList.forEach((src, idx) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            loadedImages.push({
+              img: img,
+              radius: 280 + idx * 75,
+              angle: (idx * (Math.PI * 2 / 3)),
+              speed: 0.003 + idx * 0.0005,
+              title: idx === 0 ? 'Forever BABE 💖' : idx === 1 ? '7 Years Strong 🎄' : 'Almost 8 Years ❤️'
+            });
+          };
+        });
+      };
+
+      // Build 4-Arm Spiral Stardust Disk
+      const buildGalaxyParticles = () => {
+        galaxyParticles = [];
+        const count = window.innerWidth < 768 ? 1000 : 2000;
+        const arms = 4;
+        const armSpread = 0.45;
+        const maxRadius = Math.min(width, height) * 0.85;
+
+        const colors = [
+          '#ff4081', '#ff79b0', '#f50057', '#ff80ab',
+          '#ff1744', '#f48fb1', '#ffffff', '#ffd166', '#d81b60'
+        ];
+
+        for (let i = 0; i < count; i++) {
+          const armIndex = i % arms;
+          const armOffset = (armIndex * 2 * Math.PI) / arms;
+          const distRatio = Math.pow(Math.random(), 1.6);
+          const distance = distRatio * maxRadius + 25;
+          const angle = armOffset + distance * 0.006 + (Math.random() - 0.5) * armSpread;
+
+          const x = Math.cos(angle) * distance + (Math.random() - 0.5) * (distance * 0.15);
+          const z = Math.sin(angle) * distance + (Math.random() - 0.5) * (distance * 0.15);
+          const y = (Math.random() - 0.5) * (35 * (1 - distRatio * 0.7));
+
+          galaxyParticles.push({
+            x, y, z,
+            dist: distance,
+            size: Math.random() * 2.2 + 0.6,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: Math.random() * 0.75 + 0.25,
+            twinkleSpeed: Math.random() * 0.03 + 0.01,
+            twinklePhase: Math.random() * Math.PI * 2
+          });
+        }
+
+        // Galactic Center Core
+        for (let i = 0; i < 220; i++) {
+          const r = Math.random() * 45 + 5;
+          const th = Math.random() * Math.PI * 2;
+          galaxyParticles.push({
+            x: Math.cos(th) * r,
+            y: (Math.random() - 0.5) * 15,
+            z: Math.sin(th) * r,
+            dist: r,
+            size: Math.random() * 3 + 1,
+            color: '#ffffff',
+            alpha: Math.random() * 0.9 + 0.3,
+            twinkleSpeed: 0.06,
+            twinklePhase: Math.random() * Math.PI
+          });
+        }
+      };
+
+      // Build 3D Parametric Heart Constellation Beam
+      const buildHeartBeamParticles = () => {
+        heartBeamParticles = [];
+        const count = window.innerWidth < 768 ? 450 : 800;
+        const scale = window.innerWidth < 768 ? 8 : 12.5;
+
+        for (let i = 0; i < count; i++) {
+          const t = Math.random() * Math.PI * 2;
+          const hx = 16 * Math.pow(Math.sin(t), 3) * scale;
+          const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * scale;
+          const baseElevation = -(height < 700 ? 160 : 230);
+          const fill = Math.random() > 0.4 ? Math.sqrt(Math.random()) : 1.0;
+          const jitter = (Math.random() - 0.5) * 8;
+
+          heartBeamParticles.push({
+            x: hx * fill + jitter,
+            y: baseElevation + hy * fill + (Math.random() - 0.5) * 8,
+            z: (Math.random() - 0.5) * 20,
+            originalY: baseElevation + hy * fill,
+            size: Math.random() * 2.8 + 1.2,
+            color: Math.random() > 0.3 ? '#ff4081' : Math.random() > 0.5 ? '#ffffff' : '#ffd166',
+            alpha: Math.random() * 0.8 + 0.3,
+            shimmerSpeed: Math.random() * 0.05 + 0.02,
+            shimmerPhase: Math.random() * Math.PI * 2
+          });
+        }
+
+        // Rising Light Stream
+        for (let i = 0; i < 200; i++) {
+          const progress = Math.random();
+          const beamY = -(progress * (height < 700 ? 160 : 230));
+          const beamRadius = (1 - progress * 0.5) * 14 + Math.random() * 4;
+          const beamAngle = Math.random() * Math.PI * 2;
+
+          heartBeamParticles.push({
+            x: Math.cos(beamAngle) * beamRadius,
+            y: beamY,
+            z: Math.sin(beamAngle) * beamRadius,
+            originalY: beamY,
+            size: Math.random() * 2.2 + 0.8,
+            color: progress > 0.7 ? '#ffffff' : '#ff79b0',
+            alpha: Math.random() * 0.8 + 0.2,
+            shimmerSpeed: 0.08,
+            shimmerPhase: Math.random() * Math.PI * 2
+          });
+        }
+      };
+
+      // Build Orbiting Romantic Billboard Texts
+      const buildOrbitingTexts = () => {
+        const phrases = [
+          { text: 'HAPPY BIRTHDAY', radius: 180, color: '#ff80ab', size: 14 },
+          { text: 'AMOR DE MI VIDA ❤️', radius: 240, color: '#ffd166', size: 16 },
+          { text: 'NUESTRO UNIVERSO • SIEMPRE', radius: 310, color: '#ff4081', size: 15 },
+          { text: 'AMOR INFINITO ✨', radius: 210, color: '#ffffff', size: 14 },
+          { text: '7 YEARS & TO INFINITY 🚀', radius: 370, color: '#f48fb1', size: 15 },
+          { text: 'CUMPLE FELIZ 🎂', radius: 280, color: '#ff6b81', size: 14 },
+          { text: 'FOREVER WITH YOU BABE 💖', radius: 340, color: '#ffe082', size: 16 },
+          { text: 'CELEBRAMOS 🌟', radius: 410, color: '#ff80ab', size: 13 },
+          { text: 'AL AMOR DE MI VIDA', radius: 260, color: '#f8bbd0', size: 13 },
+          { text: 'MY FOREVER LOVE ❤️', radius: 460, color: '#ff4081', size: 15 },
+        ];
+
+        orbitingTexts = phrases.map((item, index) => {
+          const baseAngle = (index * (Math.PI * 2 / phrases.length)) + Math.random() * 0.2;
+          return {
+            text: item.text,
+            radius: item.radius,
+            angle: baseAngle,
+            orbitSpeed: 0.0032 + (index % 3) * 0.0006,
+            yOffset: (Math.sin(index) * 18),
+            color: item.color,
+            fontSize: item.size
+          };
+        });
+      };
+
+      const spawnSupernova = (screenX, screenY) => {
+        CosmicSound.playChord();
+        const count = 45;
+        const colors = ['#ff4081', '#ffffff', '#ffd166', '#ff80ab', '#ff1744'];
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 6 + 2;
+          supernovas.push({
+            x: screenX,
+            y: screenY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            size: Math.random() * 4 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            life: 1.0,
+            decay: Math.random() * 0.02 + 0.015,
+            isHeart: Math.random() > 0.4
+          });
+        }
+      };
+
+      // 3D Perspective Projection
+      const project3D = (x, y, z, cx, cy) => {
+        const cosYaw = Math.cos(yaw);
+        const sinYaw = Math.sin(yaw);
+        const x1 = x * cosYaw - z * sinYaw;
+        const z1 = x * sinYaw + z * cosYaw;
+
+        const cosPitch = Math.cos(pitch);
+        const sinPitch = Math.sin(pitch);
+        const y2 = y * cosPitch - z1 * sinPitch;
+        const z2 = y * sinPitch + z1 * cosPitch;
+
+        const fov = 750 * zoom;
+        const distance = 850 + z2;
+        if (distance <= 10) return null;
+
+        const scale = fov / distance;
+        return {
+          x: cx + x1 * scale,
+          y: cy + y2 * scale,
+          scale: scale,
+          depth: z2
+        };
+      };
+
+      // Controls
+      const initControls = () => {
+        const onStart = (x, y) => {
+          isDragging = true;
+          lastMouseX = x;
+          lastMouseY = y;
+        };
+        const onMove = (x, y) => {
+          if (!isDragging) return;
+          const deltaX = x - lastMouseX;
+          const deltaY = y - lastMouseY;
+          yaw += deltaX * 0.006;
+          pitch += deltaY * 0.004;
+          pitch = Math.max(0.1, Math.min(1.4, pitch));
+          lastMouseX = x;
+          lastMouseY = y;
+        };
+        const onEnd = () => { isDragging = false; };
+
+        canvas.addEventListener('mousedown', (e) => onStart(e.clientX, e.clientY));
+        window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', onEnd);
+
+        canvas.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) onStart(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        window.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 1) onMove(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        window.addEventListener('touchend', onEnd);
+
+        canvas.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          const zoomDelta = e.deltaY * -0.0012;
+          zoom = Math.max(0.6, Math.min(1.8, zoom + zoomDelta));
+        }, { passive: false });
+
+        canvas.addEventListener('click', (e) => {
+          if (!isDragging) spawnSupernova(e.clientX, e.clientY);
+        });
+      };
+
+      // Main Render Loop
+      const render = () => {
+        const cx = width / 2;
+        const cy = height * 0.58;
+
+        ctx.fillStyle = '#030008';
+        ctx.fillRect(0, 0, width, height);
+
+        yaw += autoRotateSpeed * speedMultiplier;
+
+        // Shooting Stars
+        if (Math.random() < 0.02) {
+          shootingStars.push({
+            x: Math.random() * width,
+            y: Math.random() * (height * 0.4),
+            vx: -(Math.random() * 8 + 6),
+            vy: Math.random() * 4 + 3,
+            len: Math.random() * 60 + 40,
+            alpha: 1.0,
+            decay: 0.025
+          });
+          if (Math.random() < 0.3) CosmicSound.playTwinkle();
+        }
+
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const star = shootingStars[i];
+          star.x += star.vx;
+          star.y += star.vy;
+          star.alpha -= star.decay;
+          if (star.alpha <= 0) {
+            shootingStars.splice(i, 1);
+            continue;
+          }
+          ctx.strokeStyle = `rgba(255, 209, 230, ${star.alpha})`;
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(star.x, star.y);
+          ctx.lineTo(star.x - star.vx * 3, star.y - star.vy * 3);
+          ctx.stroke();
+        }
+
+        const depthQueue = [];
+        const now = performance.now() * 0.001;
+
+        // Galaxy Stardust
+        for (let i = 0; i < galaxyParticles.length; i++) {
+          const p = galaxyParticles[i];
+          const proj = project3D(p.x, p.y, p.z, cx, cy);
+          if (proj && proj.scale > 0) {
+            const twinkle = 0.5 + 0.5 * Math.sin(now * p.twinkleSpeed * 30 + p.twinklePhase);
+            depthQueue.push({
+              type: 'particle',
+              x: proj.x,
+              y: proj.y,
+              scale: proj.scale,
+              depth: proj.depth,
+              size: p.size * proj.scale,
+              color: p.color,
+              alpha: p.alpha * twinkle
+            });
+          }
+        }
+
+        // Heart Beam Particles
+        for (let i = 0; i < heartBeamParticles.length; i++) {
+          const p = heartBeamParticles[i];
+          p.y = p.originalY + Math.sin(now * p.shimmerSpeed * 20 + p.shimmerPhase) * 6;
+          const proj = project3D(p.x, p.y, p.z, cx, cy);
+          if (proj && proj.scale > 0) {
+            const shimmer = 0.6 + 0.4 * Math.sin(now * p.shimmerSpeed * 40 + p.shimmerPhase);
+            depthQueue.push({
+              type: 'heartParticle',
+              x: proj.x,
+              y: proj.y,
+              scale: proj.scale,
+              depth: proj.depth,
+              size: p.size * proj.scale,
+              color: p.color,
+              alpha: p.alpha * shimmer
+            });
+          }
+        }
+
+        // Orbiting Billboard Texts
+        for (let i = 0; i < orbitingTexts.length; i++) {
+          const ot = orbitingTexts[i];
+          ot.angle += ot.orbitSpeed * speedMultiplier;
+          const ox = Math.cos(ot.angle) * ot.radius;
+          const oz = Math.sin(ot.angle) * ot.radius;
+          const oy = ot.yOffset + Math.sin(ot.angle * 2) * 12;
+
+          const proj = project3D(ox, oy, oz, cx, cy);
+          if (proj && proj.scale > 0) {
+            depthQueue.push({
+              type: 'orbitText',
+              x: proj.x,
+              y: proj.y,
+              scale: proj.scale,
+              depth: proj.depth,
+              text: ot.text,
+              color: ot.color,
+              fontSize: ot.fontSize * proj.scale
+            });
+          }
+        }
+
+        // Orbiting Memory Photos
+        for (let i = 0; i < loadedImages.length; i++) {
+          const card = loadedImages[i];
+          card.angle += card.speed * speedMultiplier;
+          const cardX = Math.cos(card.angle) * card.radius;
+          const cardZ = Math.sin(card.angle) * card.radius;
+          const cardY = -(height < 700 ? 50 : 80) + Math.sin(card.angle * 3) * 15;
+
+          const proj = project3D(cardX, cardY, cardZ, cx, cy);
+          if (proj && proj.scale > 0) {
+            depthQueue.push({
+              type: 'memoryCard',
+              x: proj.x,
+              y: proj.y,
+              scale: proj.scale,
+              depth: proj.depth,
+              img: card.img,
+              title: card.title
+            });
+          }
+        }
+
+        // Sort Painter's Algorithm
+        depthQueue.sort((a, b) => b.depth - a.depth);
+
+        // Draw Depth Elements
+        for (let i = 0; i < depthQueue.length; i++) {
+          const item = depthQueue[i];
+
+          if (item.type === 'particle' || item.type === 'heartParticle') {
+            ctx.globalAlpha = Math.min(1.0, Math.max(0, item.alpha));
+            ctx.fillStyle = item.color;
+            ctx.beginPath();
+            ctx.arc(item.x, item.y, Math.max(0.6, item.size), 0, Math.PI * 2);
+            ctx.fill();
+
+            if (item.type === 'heartParticle' && item.scale > 0.8) {
+              ctx.fillStyle = 'rgba(255, 107, 180, 0.25)';
+              ctx.beginPath();
+              ctx.arc(item.x, item.y, item.size * 2.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          } else if (item.type === 'orbitText') {
+            ctx.globalAlpha = Math.min(1.0, Math.max(0.2, item.scale * 1.1));
+            ctx.font = `bold ${Math.max(8, item.fontSize)}px 'Outfit', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = item.color;
+            ctx.shadowBlur = 10 * item.scale;
+            ctx.fillStyle = item.color;
+            ctx.fillText(item.text, item.x, item.y);
+            ctx.shadowBlur = 0;
+          } else if (item.type === 'memoryCard') {
+            ctx.globalAlpha = Math.min(1.0, Math.max(0.3, item.scale * 1.2));
+            const cardW = 58 * item.scale;
+            const cardH = 70 * item.scale;
+            const cardX = item.x - cardW / 2;
+            const cardY = item.y - cardH / 2;
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+            ctx.strokeStyle = 'rgba(255, 107, 180, 0.8)';
+            ctx.lineWidth = 1.5 * item.scale;
+            ctx.shadowColor = 'rgba(255, 107, 180, 0.7)';
+            ctx.shadowBlur = 12 * item.scale;
+
+            ctx.beginPath();
+            if (typeof ctx.roundRect === 'function') {
+              ctx.roundRect(cardX, cardY, cardW, cardH, 6 * item.scale);
+            } else {
+              ctx.rect(cardX, cardY, cardW, cardH);
+            }
+            ctx.fill();
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            const pad = 4 * item.scale;
+            const imgH = 48 * item.scale;
+            try {
+              ctx.drawImage(item.img, cardX + pad, cardY + pad, cardW - pad * 2, imgH);
+            } catch (e) {}
+
+            ctx.fillStyle = '#102a43';
+            ctx.font = `bold ${Math.max(6, 7.5 * item.scale)}px 'Outfit', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText(item.title, item.x, cardY + cardH - 5 * item.scale);
+          }
+        }
+
+        ctx.globalAlpha = 1.0;
+
+        // Supernovas
+        for (let i = supernovas.length - 1; i >= 0; i--) {
+          const p = supernovas[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= p.decay;
+          if (p.life <= 0) {
+            supernovas.splice(i, 1);
+            continue;
+          }
+          ctx.globalAlpha = p.life;
+          if (p.isHeart) {
+            ctx.font = `${p.size * 4}px serif`;
+            ctx.fillText('💖', p.x, p.y);
+          } else {
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        ctx.globalAlpha = 1.0;
+
+        requestAnimationFrame(render);
+      };
+
+      // Button Handlers
+      const initHUD = () => {
+        // Speed Toggle
+        let speedLevel = 1;
+        const speedBtn = document.getElementById('speedToggleBtn');
+        const speedLabel = document.getElementById('speedLabel');
+        if (speedBtn) {
+          speedBtn.addEventListener('click', () => {
+            speedLevel = (speedLevel + 1) % 3;
+            if (speedLevel === 0) {
+              speedMultiplier = 0.4;
+              speedLabel.textContent = 'Slow Orbit 🐢';
+            } else if (speedLevel === 1) {
+              speedMultiplier = 1.0;
+              speedLabel.textContent = 'Normal Speed ⚡';
+            } else {
+              speedMultiplier = 2.2;
+              speedLabel.textContent = 'Warp Speed 🚀';
+            }
+          });
+        }
+
+        // Audio Toggle
+        const audioBtn = document.getElementById('cosmicAudioBtn');
+        if (audioBtn) audioBtn.addEventListener('click', () => CosmicSound.toggle());
+
+        // Supernova Burst Button
+        const supernovaBtn = document.getElementById('supernovaBtn');
+        if (supernovaBtn) {
+          supernovaBtn.addEventListener('click', () => {
+            spawnSupernova(width / 2, height * 0.45);
+          });
+        }
+
+        // Add Love Message Button
+        const sendWishBtn = document.getElementById('sendWishBtn');
+        if (sendWishBtn) {
+          sendWishBtn.addEventListener('click', () => {
+            const messages = [
+              'BABY KO FOREVER ❤️',
+              'IKAW RA GYUD BABE ✨',
+              'TO 8 YEARS AND BEYOND 💫',
+              'MY WHOLE UNIVERSE 🌌',
+              'I LOVE YOU BABE 💖',
+              '7 YEARS WITH YOU 💕',
+              'ALWAYS & FOREVER 🌟'
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            orbitingTexts.push({
+              text: randomMsg,
+              radius: Math.random() * 200 + 200,
+              angle: Math.random() * Math.PI * 2,
+              orbitSpeed: 0.004,
+              yOffset: (Math.random() - 0.5) * 40,
+              color: '#ff80ab',
+              fontSize: 16
+            });
+            spawnSupernova(width / 2, height * 0.5);
+
+            const quoteDisplay = document.getElementById('romanticQuoteDisplay');
+            if (quoteDisplay) {
+              quoteDisplay.textContent = `“${randomMsg}”`;
+            }
+          });
+        }
+      };
+
+      // Initialization
+      const init = () => {
+        loadMemoryImages();
+        buildGalaxyParticles();
+        buildHeartBeamParticles();
+        buildOrbitingTexts();
+        initControls();
+        initHUD();
+        requestAnimationFrame(render);
+        
+        // Spawn initial greeting supernova
+        setTimeout(() => {
+          spawnSupernova(width / 2, height * 0.45);
+        }, 500);
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
