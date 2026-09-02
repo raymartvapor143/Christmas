@@ -50,7 +50,7 @@
 
   <!-- Sound Toggle Control & Galaxy Shortcut -->
   <div class="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center gap-2">
-    <button id="goToGalaxyNavBtn" class="hidden glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-pink-200 border border-pink-400/40 bg-pink-950/40 hover:bg-pink-900/60 hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none cursor-pointer shadow-lg" aria-label="Go to Galaxy Universe">
+    <button id="goToGalaxyNavBtn" onclick="window.enterGalaxyScene && window.enterGalaxyScene()" class="hidden glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-pink-200 border border-pink-400/40 bg-pink-950/40 hover:bg-pink-900/60 hover:text-white transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none cursor-pointer shadow-lg" aria-label="Go to Galaxy Universe">
       <span>🌌</span>
       <span class="hidden xs:inline">Our Galaxy</span>
     </button>
@@ -592,7 +592,7 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button id="enterGalaxyBtn" class="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_25px_rgba(255,107,180,0.8)] hover:shadow-[0_0_35px_rgba(255,107,180,1)] transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 border border-pink-300/40">
+        <button id="enterGalaxyBtn" onclick="window.enterGalaxyScene && window.enterGalaxyScene()" class="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_25px_rgba(255,107,180,0.8)] hover:shadow-[0_0_35px_rgba(255,107,180,1)] transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 border border-pink-300/40">
           <span>🌌</span>
           <span>Travel to Our Galaxy Universe</span>
           <span class="animate-pulse">✨</span>
@@ -607,7 +607,7 @@
   <!-- ========================================================================= -->
   <!-- SCENE 3: GALAXY LOVE LINE - 3D PARTICLE UNIVERSE 🌌💖                      -->
   <!-- ========================================================================= -->
-  <section id="sceneGalaxy" class="fixed inset-0 w-full h-full bg-[#030008] hidden opacity-0 transition-opacity duration-1000 z-40 overflow-hidden select-none">
+  <section id="sceneGalaxy" class="fixed inset-0 w-full h-full bg-[#030008] hidden opacity-0 transition-opacity duration-700 z-[60] overflow-hidden select-none">
     <!-- Galaxy 3D Interactive Canvas -->
     <canvas id="galaxyCanvas" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"></canvas>
 
@@ -616,7 +616,7 @@
 
     <!-- Galaxy Top HUD Controls -->
     <div class="absolute top-3 left-3 sm:top-5 sm:left-5 z-50 flex items-center gap-2 sm:gap-3">
-      <button id="galaxyBackBtn" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-white hover:bg-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg border border-pink-400/40">
+      <button id="galaxyBackBtn" onclick="window.returnToChristmasScene && window.returnToChristmasScene()" class="glass-pill px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wide text-white hover:bg-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg border border-pink-400/40">
         <span>🎄</span>
         <span class="hidden xs:inline">Back to Christmas</span>
         <span class="xs:hidden">Back</span>
